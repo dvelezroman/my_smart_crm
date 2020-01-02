@@ -9,13 +9,15 @@ import NewClientForm from 'app/Client/NewClientForm';
 import NewCompanyForm from 'app/Company/NewCompanyForm';
 import NewPersonForm from 'app/People/NewPersonForm';
 import NewTypeForm from 'app/Type/NewTypeForm';
+import InsuranceTable from 'app/Insurance/InsuranceTable';
+import NewInsuranceForm from 'app/Insurance/NewInsuranceForm';
 
 const routes = [
 	{
 		path: '/dashboard',
 		name: 'Dashboard',
 		icon: 'nc-icon nc-bank',
-		component: Dashboard,
+		component: InsuranceTable,
 		layout: '/admin'
 	},
 	{
@@ -39,6 +41,13 @@ const routes = [
 		icon: 'nc-icon nc-ruler-pencil',
 		state: 'formsCollapse',
 		views: [
+			{
+				path: '/new-insurance-form',
+				name: 'Nueva Cuenta Seguro',
+				mini: 'NSF',
+				component: NewInsuranceForm,
+				layout: '/admin'
+			},
 			{
 				path: '/new-client-form',
 				name: 'Nuevo Cliente',
@@ -82,6 +91,13 @@ const routes = [
 		icon: 'nc-icon nc-single-copy-04',
 		state: 'tablesCollapse',
 		views: [
+			{
+				path: '/insurance-table',
+				name: 'Seguros',
+				mini: 'ST',
+				component: InsuranceTable,
+				layout: '/admin'
+			},
 			{
 				path: '/company-table',
 				name: 'Compañías',

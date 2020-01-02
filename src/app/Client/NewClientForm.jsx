@@ -141,75 +141,87 @@ class NewClientForm extends React.Component {
 										<Row>
 											<Label sm='2'>Tipo de Cliente</Label>
 											<Col lg='5' md='6' sm='3'>
-												<Select
-													className='react-select primary'
-													classNamePrefix='react-select'
-													name='singleSelect'
-													value={formData.type}
-													onChange={option => this.onChange('type', option)}
-													options={[
-														{ value: 'Natural', label: 'Persona Natural' },
-														{ value: 'Juridica', label: 'Persona Jurídica' }
-													]}
-													placeholder='Seleccione'
-												/>
+												<FormGroup>
+													<Select
+														className='react-select primary'
+														classNamePrefix='react-select'
+														name='singleSelect'
+														value={formData.type}
+														onChange={option => this.onChange('type', option)}
+														options={[
+															{ value: 'Natural', label: 'Persona Natural' },
+															{ value: 'Juridica', label: 'Persona Jurídica' }
+														]}
+														placeholder='Seleccione'
+													/>
+												</FormGroup>
 											</Col>
 										</Row>
 										<Row>
 											<Label sm='2'>Provincia</Label>
 											<Col lg='5' md='6' sm='3'>
-												<Select
-													className='react-select primary'
-													classNamePrefix='react-select'
-													name='singleSelect'
-													value={formData.province}
-													onChange={option => this.onChange('province', option)}
-													options={getProvinces()}
-													placeholder='Seleccione'
-												/>
+												<FormGroup>
+													<Select
+														className='react-select primary'
+														classNamePrefix='react-select'
+														name='singleSelect'
+														value={formData.province}
+														onChange={option => this.onChange('province', option)}
+														options={getProvinces()}
+														placeholder='Seleccione'
+													/>
+												</FormGroup>
 											</Col>
 										</Row>
 										<Row>
 											<Label sm='2'>Ciudad</Label>
 											<Col lg='5' md='6' sm='3'>
-												<Select
-													className='react-select primary'
-													classNamePrefix='react-select'
-													name='singleSelect'
-													value={formData.city}
-													onChange={option => this.onChange('city', option)}
-													options={formData.province !== '' ? getCities(formData.province) : []}
-													placeholder={
-														formData.province === '' ? 'Seleccione Provincia Primero' : 'Seleccione'
-													}
-												/>
+												<FormGroup>
+													<Select
+														className='react-select primary'
+														classNamePrefix='react-select'
+														name='singleSelect'
+														value={formData.city}
+														onChange={option => this.onChange('city', option)}
+														options={formData.province !== '' ? getCities(formData.province) : []}
+														placeholder={
+															formData.province === ''
+																? 'Seleccione Provincia Primero'
+																: 'Seleccione'
+														}
+													/>
+												</FormGroup>
 											</Col>
 										</Row>
 										<Row>
 											<Label sm='2'>Responsable</Label>
 											<Col lg='5' md='6' sm='3'>
-												<Select
-													className='react-select primary'
-													classNamePrefix='react-select'
-													name='singleSelect'
-													value={formData.personId}
-													onChange={option => this.onChange('personId', option)}
-													options={people}
-													placeholder={'Seleccione'}
-												/>
+												<FormGroup>
+													<Select
+														className='react-select primary'
+														classNamePrefix='react-select'
+														name='singleSelect'
+														value={formData.personId}
+														onChange={option => this.onChange('personId', option)}
+														options={people}
+														placeholder={'Seleccione'}
+													/>
+												</FormGroup>
 											</Col>
 										</Row>
 										<Row>
 											<Label sm='2'>Estado</Label>
 											<Col lg='5' md='6' sm='3'>
-												<Switch
-													onColor='default'
-													offColor='default'
-													defaultValue={true}
-													onChange={(_, value) => {
-														this.onChange('status', value);
-													}}
-												/>
+												<FormGroup>
+													<Switch
+														onColor='default'
+														offColor='default'
+														defaultValue={true}
+														onChange={(_, value) => {
+															this.onChange('status', value);
+														}}
+													/>
+												</FormGroup>
 											</Col>
 										</Row>
 									</Form>
