@@ -214,56 +214,58 @@ class NewPersonForm extends React.Component {
 												</FormGroup>
 											</Col>
 										</Row>
-										<Col md='4'>
-											<Card>
-												<CardHeader>
-													<CardTitle>Fecha de Nacimiento</CardTitle>
-												</CardHeader>
-												<CardBody>
-													<FormGroup>
-														<ReactDatetime
-															inputProps={{
-																className: 'form-control',
-																placeholder: 'Seleccione fecha'
-															}}
-															timeFormat={false}
-															onChange={value => {
-																const date = value.format('YYYY-MM-DD');
-																this.onChange('birthday', date);
-															}}
-														/>
-													</FormGroup>
-												</CardBody>
-											</Card>
-										</Col>
+										<Row>
+											<Label sm='2'>Fecha de Nacimiento</Label>
+											<Col md='4'>
+												<FormGroup>
+													<ReactDatetime
+														inputProps={{
+															className: 'form-control',
+															placeholder: 'Seleccione fecha'
+														}}
+														timeFormat={false}
+														onChange={value => {
+															const date = value.format('YYYY-MM-DD');
+															this.onChange('birthday', date);
+														}}
+													/>
+												</FormGroup>
+											</Col>
+										</Row>
 										<Row>
 											<Label sm='2'>Provincia</Label>
 											<Col lg='5' md='6' sm='3'>
-												<Select
-													className='react-select primary'
-													classNamePrefix='react-select'
-													name='singleSelect'
-													value={formData.province}
-													onChange={option => this.onChange('province', option)}
-													options={getProvinces()}
-													placeholder='Seleccione'
-												/>
+												<FormGroup>
+													<Select
+														className='react-select primary'
+														classNamePrefix='react-select'
+														name='singleSelect'
+														value={formData.province}
+														onChange={option => this.onChange('province', option)}
+														options={getProvinces()}
+														placeholder='Seleccione'
+													/>
+												</FormGroup>
 											</Col>
 										</Row>
 										<Row>
 											<Label sm='2'>Ciudad</Label>
 											<Col lg='5' md='6' sm='3'>
-												<Select
-													className='react-select primary'
-													classNamePrefix='react-select'
-													name='singleSelect'
-													value={formData.city}
-													onChange={option => this.onChange('city', option)}
-													options={formData.province !== '' ? getCities(formData.province) : []}
-													placeholder={
-														formData.province === '' ? 'Seleccione Provincia Primero' : 'Seleccione'
-													}
-												/>
+												<FormGroup>
+													<Select
+														className='react-select primary'
+														classNamePrefix='react-select'
+														name='singleSelect'
+														value={formData.city}
+														onChange={option => this.onChange('city', option)}
+														options={formData.province !== '' ? getCities(formData.province) : []}
+														placeholder={
+															formData.province === ''
+																? 'Seleccione Provincia Primero'
+																: 'Seleccione'
+														}
+													/>
+												</FormGroup>
 											</Col>
 										</Row>
 									</Form>

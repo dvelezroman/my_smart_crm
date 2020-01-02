@@ -25,6 +25,7 @@ import Sidebar from 'components/Sidebar/Sidebar.jsx';
 import FixedPlugin from 'components/FixedPlugin/FixedPlugin.jsx';
 
 import routes from 'routes.js';
+import LocalStorage from 'business/storage/LocalStorage';
 
 var ps;
 
@@ -42,6 +43,11 @@ class Admin extends React.Component {
 			document.documentElement.className += ' perfect-scrollbar-on';
 			document.documentElement.classList.remove('perfect-scrollbar-off');
 			ps = new PerfectScrollbar(this.refs.mainPanel);
+		}
+		const token = LocalStorage.getToken();
+		if (!LocalStorage.validateToken(token)) {
+			LocalStorage.deleteToken();
+			this.props.history.push('/auth/login');
 		}
 	}
 	componentWillUnmount() {

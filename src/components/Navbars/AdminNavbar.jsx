@@ -134,7 +134,7 @@ class AdminNavbar extends React.Component {
 							<span className='navbar-toggler-bar navbar-kebab' />
 						</button>
 						<Collapse className='justify-content-end' navbar isOpen={this.state.collapseOpen}>
-							<Form>
+							{/* <Form>
 								<InputGroup className='no-border'>
 									<Input defaultValue='' placeholder='Search...' type='text' />
 									<InputGroupAddon addonType='append'>
@@ -187,7 +187,7 @@ class AdminNavbar extends React.Component {
 										</p>
 									</NavLink>
 								</NavItem>
-							</Nav>
+							</Nav> */}
 						</Collapse>
 					</Container>
 				</Navbar>
