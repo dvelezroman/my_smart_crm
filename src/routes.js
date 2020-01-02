@@ -1,4 +1,3 @@
-import Dashboard from 'views/Dashboard.jsx';
 import Login from './app/Login/LoginScreen';
 import PeopleTable from 'app/People/PeopleTable';
 import ClientTable from 'app/Client/ClientTable';
