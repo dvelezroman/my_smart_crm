@@ -154,6 +154,7 @@ class NewInsuranceForm extends React.Component {
 
 	render() {
 		const { formData, people, companies, clients, types } = this.state;
+		console.log('Volví');
 		return (
 			<>
 				<div className='content'>
