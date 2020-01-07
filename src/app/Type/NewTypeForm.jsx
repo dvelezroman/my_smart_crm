@@ -14,7 +14,8 @@ import {
 	Input,
 	FormText,
 	Row,
-	Col
+	Col,
+	Modal
 } from 'reactstrap';
 import { NEW_TYPE_MUTATION, GET_TYPES_DATA } from './query';
 
@@ -32,9 +33,10 @@ class NewTypeForm extends React.Component {
 	}
 
 	resetFields = () => {
+		const formData = { code: '', name: '' };
 		this.setState({
-			code: '',
-			name: ''
+			formData,
+			showModal: true
 		});
 	};
 
@@ -137,6 +139,39 @@ class NewTypeForm extends React.Component {
 								</CardFooter>
 							</Card>
 						</Col>
+					</Row>
+					<Row>
+						{/* small modal */}
+						<Modal
+							className='modal-sm'
+							modalclassname='modal-primary'
+							isOpen={this.state.showModal}
+							// toggle={this.toggleModal}
+						>
+							<div className='modal-header justify-content-center'>
+								<div className='modal-profile ml-auto mr-auto'>
+									<i className='nc-icon nc-bulb-63' />
+								</div>
+							</div>
+							<div className='modal-body'>
+								<p>Se registró nueva Compañía</p>
+							</div>
+							<div className='modal-footer'>
+								<div className='center'>
+									<Button
+										color='link'
+										data-dismiss='modal'
+										type='button'
+										onClick={() => {
+											this.setState({ showModal: false });
+										}}
+									>
+										Cerrar
+									</Button>
+								</div>
+							</div>
+						</Modal>
+						{/* end small modal */}
 					</Row>
 				</div>
 			</>

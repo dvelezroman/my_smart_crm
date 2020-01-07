@@ -1,9 +1,8 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
-import { Button } from 'reactstrap';
-
+import { graphql, Mutation } from 'react-apollo';
+import { Button, Modal } from 'reactstrap';
 // reactstrap components
-import { GET_TYPES_DATA } from './query';
+import { GET_TYPES_DATA, DELETE_TYPE_MUTATION } from './query';
 import ReactTable from 'app/common/React-Table';
 
 const columns = [
@@ -28,6 +27,10 @@ const columns = [
 ];
 
 class TypeTable extends React.Component {
+	state = {
+		showModal: false,
+		typeId: 0
+	};
 	parseData = data =>
 		data.map(item => ({
 			id: item.id,
@@ -37,7 +40,7 @@ class TypeTable extends React.Component {
 				// we've added some custom button actions
 				<div className='actions-right'>
 					{/* use this button to add a like kind of action */}
-					<Button
+					{/* <Button
 						onClick={() => {
 							console.log('Verga');
 						}}
@@ -46,9 +49,9 @@ class TypeTable extends React.Component {
 						className='btn-icon btn-link like'
 					>
 						<i className='fa fa-heart' />
-					</Button>{' '}
+					</Button>{' '} */}
 					{/* use this button to add a edit kind of action */}
-					<Button
+					{/* <Button
 						onClick={() => {
 							console.log('Verga');
 						}}
@@ -57,11 +60,12 @@ class TypeTable extends React.Component {
 						className='btn-icon btn-link edit'
 					>
 						<i className='fa fa-edit' />
-					</Button>{' '}
+					</Button>{' '} */}
 					{/* use this button to remove the data row */}
 					<Button
 						onClick={() => {
-							console.log('Verga');
+							// remove mutation
+							this.onPressDelete(item.id);
 						}}
 						color='danger'
 						size='sm'
@@ -73,13 +77,81 @@ class TypeTable extends React.Component {
 			)
 		}));
 
+	onPressDelete = id => {
+		console.log({ id });
+		this.setState({ showModal: true, typeId: id });
+	};
+
 	render() {
 		const {
 			data: { loading, types }
 		} = this.props;
 		const rows = loading ? [] : this.parseData(types.types);
-		console.log({ rows });
-		return <ReactTable title='Tipos de Seguro' columns={columns} data={rows} />;
+		return (
+			<>
+				<ReactTable title='Tipos de Seguro' columns={columns} data={rows} />
+				{/* small modal */}
+				<Modal
+					className='modal-sm'
+					modalclassname='modal-primary'
+					isOpen={this.state.showModal}
+					// toggle={this.toggleModal}
+				>
+					<div className='modal-header justify-content-center'>
+						<div className='modal-profile ml-auto mr-auto'>
+							<i className='nc-icon nc-bulb-63' />
+						</div>
+					</div>
+					<div className='modal-body'>
+						<p>Se va a Eliminar un registro...!</p>
+					</div>
+					<div className='modal-footer'>
+						<div className='left-side'>
+							<Button
+								color='link'
+								type='button'
+								onClick={() => {
+									this.setState({ showModal: false });
+								}}
+							>
+								Cancelar
+							</Button>
+						</div>
+						<div className='divider' />
+						<div className='right-side'>
+							<Mutation
+								mutation={DELETE_TYPE_MUTATION}
+								variables={{
+									id: this.state.typeId
+								}}
+								refetchQueries={() => {
+									return [
+										{
+											query: GET_TYPES_DATA
+										}
+									];
+								}}
+							>
+								{(deleteType, { loading }) => (
+									<Button
+										color='link'
+										data-dismiss='modal'
+										type='button'
+										onClick={() => {
+											deleteType();
+											this.setState({ showModal: false });
+										}}
+									>
+										Eliminar
+									</Button>
+								)}
+							</Mutation>
+						</div>
+					</div>
+				</Modal>
+				{/* end small modal */}
+			</>
+		);
 	}
 }
 

@@ -14,7 +14,8 @@ import {
 	Input,
 	FormText,
 	Row,
-	Col
+	Col,
+	Modal
 } from 'reactstrap';
 import Select from 'react-select';
 import ReactDatetime from 'react-datetime';
@@ -54,7 +55,8 @@ class NewPersonForm extends React.Component {
 			contact: ''
 		};
 		this.setState({
-			formData
+			formData,
+			showModal: true
 		});
 	};
 
@@ -313,6 +315,39 @@ class NewPersonForm extends React.Component {
 								</CardFooter>
 							</Card>
 						</Col>
+					</Row>
+					<Row>
+						{/* small modal */}
+						<Modal
+							className='modal-sm'
+							modalclassname='modal-primary'
+							isOpen={this.state.showModal}
+							// toggle={this.toggleModal}
+						>
+							<div className='modal-header justify-content-center'>
+								<div className='modal-profile ml-auto mr-auto'>
+									<i className='nc-icon nc-bulb-63' />
+								</div>
+							</div>
+							<div className='modal-body'>
+								<p>Se registró nueva Persona</p>
+							</div>
+							<div className='modal-footer'>
+								<div className='center'>
+									<Button
+										color='link'
+										data-dismiss='modal'
+										type='button'
+										onClick={() => {
+											this.setState({ showModal: false });
+										}}
+									>
+										Cerrar
+									</Button>
+								</div>
+							</div>
+						</Modal>
+						{/* end small modal */}
 					</Row>
 				</div>
 			</>

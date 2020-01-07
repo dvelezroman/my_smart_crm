@@ -1,80 +1,117 @@
 import React from 'react';
-import { Query, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import { Button } from 'reactstrap';
 
-// reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from 'reactstrap';
 import { GET_INSURANCES_DATA } from './query';
+import ReactTable from 'app/common/React-Table';
+
+const columns = [
+	{
+		Header: 'id',
+		accessor: 'id'
+	},
+	{
+		Header: 'Referencia',
+		accessor: 'ref'
+	},
+	{
+		Header: 'Desde',
+		accessor: 'from'
+	},
+	{
+		Header: 'Hasta',
+		accessor: 'to'
+	},
+	{
+		Header: 'Periodo',
+		accessor: 'term'
+	},
+	{
+		Header: 'Cliente',
+		accessor: 'client'
+	},
+	{
+		Header: 'Persona',
+		accessor: 'person'
+	},
+	{
+		Header: 'Compañía',
+		accessor: 'company'
+	},
+	{
+		Header: 'Tipo',
+		accessor: 'insurance_type'
+	},
+	{ Header: 'Comentario', accessor: 'comments' }
+	// {
+	// 	Header: 'Acciones',
+	// 	accessor: 'actions',
+	// 	sortable: false,
+	// 	filterable: false
+	// }
+];
 
 class InsuranceTable extends React.Component {
+	parseData = data =>
+		data.map(item => {
+			return {
+				id: item.id,
+				ref: item.ref,
+				from: item.from,
+				to: item.to,
+				term: item.term,
+				client: item.client ? item.client.name : 'N/A',
+				person: item.person.first_name + ', ' + item.person.last_name,
+				company: item.company.name,
+				insurance_type: item.insurance_type.name,
+				comments: item.comment,
+				actions: (
+					// we've added some custom button actions
+					<div className='actions-right'>
+						{/* use this button to add a like kind of action */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='info'
+							size='sm'
+							className='btn-icon btn-link like'
+						>
+							<i className='fa fa-heart' />
+						</Button>{' '}
+						{/* use this button to add a edit kind of action */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='warning'
+							size='sm'
+							className='btn-icon btn-link edit'
+						>
+							<i className='fa fa-edit' />
+						</Button>{' '}
+						{/* use this button to remove the data row */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='danger'
+							size='sm'
+							className='btn-icon btn-link remove'
+						>
+							<i className='fa fa-times' />
+						</Button>{' '}
+					</div>
+				)
+			};
+		});
+
 	render() {
-		const { data } = this.props;
-		console.log({ data });
-		return (
-			<>
-				<div className='content'>
-					<Row>
-						<Col md='12'>
-							<Card>
-								<CardHeader>
-									<CardTitle tag='h4'>Listado de Seguros Contratados</CardTitle>
-								</CardHeader>
-								<CardBody className='table-full-width table-hover'>
-									<Table responsive>
-										<thead>
-											<tr>
-												<th>id</th>
-												<th>Referencia</th>
-												<th>Desde</th>
-												<th>Hasta</th>
-												<th>Periodo</th>
-												<th>Cliente</th>
-												<th>Responsable</th>
-												<th>Compañía</th>
-												<th>Tipo</th>
-												<th>Comentarios</th>
-											</tr>
-										</thead>
-										<tbody>
-											{data.insurances &&
-												data.insurances.insurances.map(
-													(
-														{
-															id,
-															ref,
-															from,
-															to,
-															term,
-															comment,
-															client,
-															person,
-															company,
-															insurance_type
-														},
-														index
-													) => (
-														<tr key={index} className={index % 2 ? 'table-success' : ''}>
-															<th>{id}</th>
-															<td>{ref}</td>
-															<td>{from}</td>
-															<td>{to}</td>
-															<td>{term}</td>
-															<td>{client ? client.name : 'N/A'}</td>
-															<td>{`${person.last_name}, ${person.first_name}`}</td>
-															<td>{company.name}</td>
-															<td>{insurance_type.name}</td>
-															<td>{comment}</td>
-														</tr>
-													)
-												)}
-										</tbody>
-									</Table>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-				</div>
-			</>
-		);
+		const {
+			data: { loading, insurances }
+		} = this.props;
+		const rows = loading ? [] : this.parseData(insurances.insurances);
+		return <ReactTable title='Listado de Seguros' columns={columns} data={rows} />;
 	}
 }
 

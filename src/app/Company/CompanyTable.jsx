@@ -1,53 +1,88 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import { Button } from 'reactstrap';
 
 // reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from 'reactstrap';
 import { GET_COMPANIES_DATA } from './query';
 
+import ReactTable from 'app/common/React-Table';
+
+const columns = [
+	{
+		Header: 'Id',
+		accessor: 'id'
+	},
+	{
+		Header: 'Referencia',
+		accessor: 'ref'
+	},
+	{
+		Header: 'Nombre',
+		accessor: 'name'
+	}
+	// {
+	// 	Header: 'Acciones',
+	// 	accessor: 'actions',
+	// 	sortable: false,
+	// 	filterable: false
+	// }
+];
+
 class CompanyTable extends React.Component {
+	parseData = data =>
+		data.map(item => {
+			return {
+				id: item.id,
+				ref: item.ref,
+				name: item.name,
+				actions: (
+					// we've added some custom button actions
+					<div className='actions-right'>
+						{/* use this button to add a like kind of action */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='info'
+							size='sm'
+							className='btn-icon btn-link like'
+						>
+							<i className='fa fa-heart' />
+						</Button>{' '}
+						{/* use this button to add a edit kind of action */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='warning'
+							size='sm'
+							className='btn-icon btn-link edit'
+						>
+							<i className='fa fa-edit' />
+						</Button>{' '}
+						{/* use this button to remove the data row */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='danger'
+							size='sm'
+							className='btn-icon btn-link remove'
+						>
+							<i className='fa fa-times' />
+						</Button>{' '}
+					</div>
+				)
+			};
+		});
+
 	render() {
-		return (
-			<>
-				<div className='content'>
-					<Row>
-						<Col md='12'>
-							<Card>
-								<CardHeader>
-									<CardTitle tag='h4'>Compañías</CardTitle>
-								</CardHeader>
-								<CardBody className='table-full-width table-hover'>
-									<Table responsive>
-										<thead>
-											<tr>
-												<th>id</th>
-												<th>Referencia</th>
-												<th>Nombre</th>
-											</tr>
-										</thead>
-										<tbody>
-											<Query query={GET_COMPANIES_DATA}>
-												{({ data, loading }) => {
-													if (loading) return null;
-													return data.companies.companies.map(({ id, ref, name }, index) => (
-														<tr key={index} className={index % 2 ? 'table-success' : ''}>
-															<th>{id}</th>
-															<td>{ref}</td>
-															<td>{name}</td>
-														</tr>
-													));
-												}}
-											</Query>
-										</tbody>
-									</Table>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-				</div>
-			</>
-		);
+		const {
+			data: { loading, companies }
+		} = this.props;
+		const rows = loading ? [] : this.parseData(companies.companies);
+		return <ReactTable title='Listado de Compañías' columns={columns} data={rows} />;
 	}
 }
 
-export default CompanyTable;
+export default graphql(GET_COMPANIES_DATA)(CompanyTable);

@@ -1,9 +1,52 @@
 import React from 'react';
-import { Query, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 // reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from 'reactstrap';
+import { Button } from 'reactstrap';
+
+import ReactTable from 'app/common/React-Table';
 import { GET_CLIENTS_DATA } from './query';
+
+const columns = [
+	{
+		Header: 'Id',
+		accessor: 'id'
+	},
+	{
+		Header: 'Documento',
+		accessor: 'document'
+	},
+	{
+		Header: 'Nombre',
+		accessor: 'name'
+	},
+	{
+		Header: 'Tipo',
+		accessor: 'type'
+	},
+	{
+		Header: 'Ciudad',
+		accessor: 'city'
+	},
+	{
+		Header: 'Provincia',
+		accessor: 'province'
+	},
+	{
+		Header: 'Estado',
+		accessor: 'status'
+	},
+	{
+		Header: 'Persona',
+		accessor: 'person'
+	}
+	// {
+	// 	Header: 'Acciones',
+	// 	accessor: 'actions',
+	// 	sortable: false,
+	// 	filterable: false
+	// }
+];
 
 class ClientTable extends React.Component {
 	state = {
@@ -11,7 +54,59 @@ class ClientTable extends React.Component {
 		fetched: false
 	};
 
-	parseData = people => {
+	parseData = data =>
+		data.map(item => {
+			return {
+				id: item.id,
+				document: item.document,
+				name: item.name,
+				type: item.type,
+				city: item.city,
+				province: item.province,
+				status: item.status ? 'Activo' : 'Inactivo',
+				person: this.state.people[item.personId],
+				actions: (
+					// we've added some custom button actions
+					<div className='actions-right'>
+						{/* use this button to add a like kind of action */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='info'
+							size='sm'
+							className='btn-icon btn-link like'
+						>
+							<i className='fa fa-heart' />
+						</Button>{' '}
+						{/* use this button to add a edit kind of action */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='warning'
+							size='sm'
+							className='btn-icon btn-link edit'
+						>
+							<i className='fa fa-edit' />
+						</Button>{' '}
+						{/* use this button to remove the data row */}
+						<Button
+							onClick={() => {
+								console.log('Verga');
+							}}
+							color='danger'
+							size='sm'
+							className='btn-icon btn-link remove'
+						>
+							<i className='fa fa-times' />
+						</Button>{' '}
+					</div>
+				)
+			};
+		});
+
+	parsePerson = people => {
 		const parsedPeople = {};
 		people.forEach(person => {
 			const { id, last_name, first_name } = person;
@@ -22,63 +117,15 @@ class ClientTable extends React.Component {
 
 	componentWillUpdate(nextProps) {
 		if (!this.state.fetched && nextProps.data && nextProps.data.people.people.length)
-			this.parseData(nextProps.data.people.people);
+			this.parsePerson(nextProps.data.people.people);
 	}
 
 	render() {
-		const { data } = this.props;
-		console.log(this.state);
-		return (
-			<>
-				<div className='content'>
-					<Row>
-						<Col md='12'>
-							<Card>
-								<CardHeader>
-									<CardTitle tag='h4'>Clientes</CardTitle>
-								</CardHeader>
-								<CardBody className='table-full-width table-hover'>
-									<Table responsive>
-										<thead>
-											<tr>
-												<th>id</th>
-												<th>Documento</th>
-												<th>Nombre</th>
-												<th>Tipo</th>
-												<th>Ciudad</th>
-												<th>Provincia</th>
-												<th>Estado</th>
-												<th>Responsable</th>
-											</tr>
-										</thead>
-										<tbody>
-											{data.clients &&
-												data.clients.clients.map(
-													(
-														{ id, document, name, type, city, province, status, personId },
-														index
-													) => (
-														<tr key={index} className={index % 2 ? 'table-success' : ''}>
-															<th>{id}</th>
-															<td>{document}</td>
-															<td>{name}</td>
-															<td>{type}</td>
-															<td>{city}</td>
-															<td>{province}</td>
-															<td>{status ? 'Activo' : 'Inactivo'}</td>
-															<td>{this.state.people[personId]}</td>
-														</tr>
-													)
-												)}
-										</tbody>
-									</Table>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-				</div>
-			</>
-		);
+		const {
+			data: { loading, clients }
+		} = this.props;
+		const rows = loading ? [] : this.parseData(clients.clients);
+		return <ReactTable title='Listado de Clientes' columns={columns} data={rows} />;
 	}
 }
 

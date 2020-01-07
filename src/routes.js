@@ -11,6 +11,7 @@ import NewTypeForm from 'app/Type/NewTypeForm';
 import InsuranceTable from 'app/Insurance/InsuranceTable';
 import NewInsuranceForm from 'app/Insurance/NewInsuranceForm';
 import ReactTables from 'views/tables/ReactTables';
+import Notifications from 'views/components/Notifications';
 
 const routes = [
 	{
@@ -124,13 +125,6 @@ const routes = [
 				name: 'Tipos de Seguro',
 				mini: 'TT',
 				component: TypeTable,
-				layout: '/admin'
-			},
-			{
-				path: '/react-table',
-				name: 'React Tables',
-				mini: 'ET',
-				component: ReactTables,
 				layout: '/admin'
 			}
 		]

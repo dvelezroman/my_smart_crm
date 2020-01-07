@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Mutation } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 // reactstrap components
 import {
 	Button,
@@ -14,7 +14,8 @@ import {
 	Input,
 	FormText,
 	Row,
-	Col
+	Col,
+	Modal
 } from 'reactstrap';
 import { NEW_COMPANY_MUTATION, GET_COMPANIES_DATA } from './query';
 
@@ -32,9 +33,10 @@ class NewCompanyForm extends React.Component {
 	}
 
 	resetFields = () => {
+		const formData = { ref: '', name: '' };
 		this.setState({
-			ref: '',
-			name: ''
+			formData,
+			showModal: true
 		});
 	};
 
@@ -72,7 +74,7 @@ class NewCompanyForm extends React.Component {
 													<Input
 														type='text'
 														onChange={e => {
-															this.onChange('reference', e.target.value);
+															this.onChange('ref', e.target.value);
 														}}
 														value={formData.ref}
 													/>
@@ -137,6 +139,39 @@ class NewCompanyForm extends React.Component {
 								</CardFooter>
 							</Card>
 						</Col>
+					</Row>
+					<Row>
+						{/* small modal */}
+						<Modal
+							className='modal-sm'
+							modalclassname='modal-primary'
+							isOpen={this.state.showModal}
+							// toggle={this.toggleModal}
+						>
+							<div className='modal-header justify-content-center'>
+								<div className='modal-profile ml-auto mr-auto'>
+									<i className='nc-icon nc-bulb-63' />
+								</div>
+							</div>
+							<div className='modal-body'>
+								<p>Se registró nueva Compañía</p>
+							</div>
+							<div className='modal-footer'>
+								<div className='center'>
+									<Button
+										color='link'
+										data-dismiss='modal'
+										type='button'
+										onClick={() => {
+											this.setState({ showModal: false });
+										}}
+									>
+										Cerrar
+									</Button>
+								</div>
+							</div>
+						</Modal>
+						{/* end small modal */}
 					</Row>
 				</div>
 			</>
