@@ -17,7 +17,7 @@ import {
 	InputGroup,
 	Container,
 	Col,
-	Row
+	Row,
 } from 'reactstrap';
 import LocalStorage from 'business/storage/LocalStorage';
 import UserDAO from 'business/dao/UserDAO';
@@ -31,7 +31,7 @@ class Login extends React.Component {
 			rememberMe: false,
 			openModal: false,
 			error: null,
-			initialConfig: true
+			initialConfig: true,
 		};
 	}
 	setInitialConfig() {
@@ -44,7 +44,7 @@ class Login extends React.Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		// TODO: verify if the admin user is set, and the mail config
 		// execute an stepper before going to Dashboard
-		if (nextProps.data) {
+		if (nextProps.data && nextProps.data.users && nextProps.data.users.users) {
 			if (!nextProps.data.users.users.length) {
 				this.setInitialConfig();
 				// this.props.history.push('/initialConfig');
@@ -176,7 +176,7 @@ class Login extends React.Component {
 				<div
 					className='full-page-background'
 					style={{
-						backgroundImage: `url(${require('assets/img/bg/fabio-mangione.jpg')})`
+						backgroundImage: `url(${require('assets/img/bg/fabio-mangione.jpg')})`,
 					}}
 				/>
 			</div>

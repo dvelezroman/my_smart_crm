@@ -6,14 +6,16 @@ const envs = (() => {
 			ENVIRONMENT: 'development',
 			SERVERURL: 'http://localhost:3000/api',
 			PORT: 3000,
-			JWT_SECRET: 'caffeinasw'
+			JWT_SECRET: 'caffeinasw',
 		};
 	} else {
 		return {
 			ENVIRONMENT: 'production',
 			SERVERURL: 'http://167.99.126.49:3000/api',
 			PORT: 3000,
-			JWT_SECRET: 'caffeinasw'
+			JWT_SECRET: 'caffeinasw',
+			DB_USER: 'mysmartcrm',
+			DB_PASSWORD: '@mysmartcrm2020@',
 		};
 	}
 })();
