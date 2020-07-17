@@ -11,7 +11,7 @@ const envs = (() => {
 	} else {
 		return {
 			ENVIRONMENT: 'production',
-			SERVERURL: 'http://167.99.126.49:3000/api',
+			SERVERURL: 'http://204.93.197.180:3000/api',
 			PORT: 3000,
 			JWT_SECRET: 'caffeinasw',
 			DB_USER: 'mysmartcrm',
