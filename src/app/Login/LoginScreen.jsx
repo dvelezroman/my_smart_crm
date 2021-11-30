@@ -37,7 +37,6 @@ class Login extends React.Component {
 	setInitialConfig() {
 		// Shows the initial Config Screen
 		// when finished must get back to Login Screen
-		console.log('Initial Config is needed');
 		//this.props.history.push('/initialSettings');
 	}
 
@@ -59,8 +58,6 @@ class Login extends React.Component {
 
 	onCompleted = ({ login }) => {
 		if (login.status) {
-			// FIX: delete when needed
-			console.log(login.token);
 			LocalStorage.saveToken(login.token);
 			UserDAO.setUser(login.user);
 			this.props.history.push('/admin/dashboard');

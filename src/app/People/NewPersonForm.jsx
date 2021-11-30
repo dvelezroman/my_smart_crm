@@ -102,7 +102,6 @@ class NewPersonForm extends React.Component {
 
 	render() {
 		const { formData } = this.state;
-		console.log(this.state);
 		return (
 			<>
 				<div className='content'>

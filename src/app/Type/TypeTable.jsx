@@ -42,7 +42,7 @@ class TypeTable extends React.Component {
 					{/* use this button to add a like kind of action */}
 					{/* <Button
 						onClick={() => {
-							console.log('Verga');
+							;
 						}}
 						color='info'
 						size='sm'
@@ -53,7 +53,7 @@ class TypeTable extends React.Component {
 					{/* use this button to add a edit kind of action */}
 					{/* <Button
 						onClick={() => {
-							console.log('Verga');
+							;
 						}}
 						color='warning'
 						size='sm'
@@ -78,7 +78,6 @@ class TypeTable extends React.Component {
 		}));
 
 	onPressDelete = id => {
-		console.log({ id });
 		this.setState({ showModal: true, typeId: id });
 	};
 

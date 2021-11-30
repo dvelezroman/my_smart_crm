@@ -38,7 +38,6 @@ class MailConfigForm extends React.Component {
 	}
 
 	onChange = (name, value) => {
-		console.log({ value });
 		const { formData } = this.state;
 		if (name === 'mailport') formData[name] = toString(value);
 		formData[name] = value;

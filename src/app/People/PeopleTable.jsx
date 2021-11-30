@@ -78,7 +78,7 @@ class PeopleTable extends React.Component {
 					{/* use this button to add a like kind of action */}
 					{/* <Button
 						onClick={() => {
-							console.log('Verga');
+							;
 						}}
 						color='info'
 						size='sm'
@@ -89,7 +89,7 @@ class PeopleTable extends React.Component {
 					{/* use this button to add a edit kind of action */}
 					{/* <Button
 						onClick={() => {
-							console.log('Verga');
+							;
 						}}
 						color='warning'
 						size='sm'
@@ -100,7 +100,7 @@ class PeopleTable extends React.Component {
 					{/* use this button to remove the data row */}
 					<Button
 						onClick={() => {
-							console.log('Verga');
+							;
 						}}
 						color='danger'
 						size='sm'
