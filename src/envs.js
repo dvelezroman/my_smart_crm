@@ -11,11 +11,11 @@ const envs = (() => {
 	} else {
 		return {
 			ENVIRONMENT: 'production',
-			SERVERURL: 'http://204.93.197.180:3001/api',
+			SERVERURL: 'https://my.smartcrm.ec:3005/api',
 			PORT: 3001,
 			JWT_SECRET: 'caffeinasw',
-			DB_USER: 'mysmartcrm',
-			DB_PASSWORD: '@mysmartcrm2020@',
+			DB_USER: 'dvelez',
+			DB_PASSWORD: 'dvelez2021',
 		};
 	}
 })();
