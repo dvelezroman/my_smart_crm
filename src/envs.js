@@ -11,8 +11,8 @@ const envs = (() => {
 	} else {
 		return {
 			ENVIRONMENT: 'production',
-			SERVERURL: 'https://my.smartcrm.ec:3001/api',
-			PORT: 3001,
+			SERVERURL: 'https://my.smartcrm.ec:8443/api',
+			PORT: 8443,
 			JWT_SECRET: 'caffeinasw',
 			DB_USER: 'dvelez',
 			DB_PASSWORD: 'dvelez2021',
