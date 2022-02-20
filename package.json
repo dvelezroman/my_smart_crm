@@ -41,7 +41,7 @@
 		"history": "4.9.0",
 		"jsonwebtoken": "^8.5.1",
 		"moment": "2.24.0",
-		"node-sass": "^4.13.0",
+		"node-sass": "^7.0.0",
 		"nouislider": "13.1.5",
 		"perfect-scrollbar": "1.4.0",
 		"prop-types": "15.7.2",
@@ -74,7 +74,7 @@
 		"@types/googlemaps": "3.36.2",
 		"@types/markerclustererplus": "2.1.33",
 		"@types/react": "16.8.19",
-		"ajv": "6.10.0",
+		"ajv": "6.12.3",
 		"jquery": "3.4.1",
 		"typescript": "3.5.1"
 	}
