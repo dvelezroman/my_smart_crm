@@ -5,17 +5,13 @@ const envs = (() => {
 		return {
 			ENVIRONMENT: 'development',
 			SERVERURL: 'http://localhost:3001/api',
-			PORT: 3001,
-			JWT_SECRET: 'caffeinasw',
+			PORT: 3001
 		};
 	} else {
 		return {
 			ENVIRONMENT: 'production',
-			SERVERURL: 'http://my.smartcrm.ec:8443/api',
-			PORT: 3001,
-			JWT_SECRET: 'caffeinasw',
-			DB_USER: 'dvelez',
-			DB_PASSWORD: 'dvelez2021',
+			SERVERURL: 'http://localhost:3001/api',
+			PORT: 3001
 		};
 	}
 })();
