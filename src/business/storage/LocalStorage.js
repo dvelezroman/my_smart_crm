@@ -15,7 +15,7 @@ class LocalStorage {
 
 	static validateToken = token => {
 		try {
-			const decoded = jwt.verify(token, 'caffeinasw');
+			const decoded = jwt.verify(token, 'mateocorp2022');
 			return decoded;
 		} catch {
 			return false;

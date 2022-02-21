@@ -154,7 +154,7 @@ class MailConfigForm extends React.Component {
 														<Input
 															type='checkbox'
 															checked={formData.welcome}
-															onClick={e => {
+															onChange={e => {
 																this.onChange('welcome', e.target.checked);
 															}}
 														/>
@@ -167,9 +167,12 @@ class MailConfigForm extends React.Component {
 														<Input
 															type='checkbox'
 															checked={formData.birthday}
-															onClick={e => {
+															onChange={e => {
 																this.onChange('birthday', e.target.checked);
 															}}
+															// onClick={e => {
+															// 	this.onChange('birthday', e.target.checked);
+															// }}
 														/>
 														<span className='form-check-sign' />
 														Cumpleaños
@@ -179,7 +182,7 @@ class MailConfigForm extends React.Component {
 													<Label check>
 														<Input
 															type='checkbox'
-															onClick={e => {
+															onChange={e => {
 																this.onChange('renewal', e.target.checked);
 															}}
 															checked={formData.renewal}

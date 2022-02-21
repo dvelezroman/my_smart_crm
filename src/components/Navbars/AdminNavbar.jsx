@@ -47,6 +47,9 @@ class AdminNavbar extends React.Component {
 	componentDidMount() {
 		window.addEventListener('resize', this.updateColor);
 	}
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.updateColor);
+	}
 	componentDidUpdate(e) {
 		if (
 			window.outerWidth < 993 &&

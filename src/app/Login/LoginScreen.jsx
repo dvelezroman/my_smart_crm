@@ -37,15 +37,15 @@ class Login extends React.Component {
 	setInitialConfig() {
 		// Shows the initial Config Screen
 		// when finished must get back to Login Screen
-		//this.props.history.push('/initialSettings');
+		this.props.history.push('/initialSettings');
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
 		// TODO: verify if the admin user is set, and the mail config
 		// execute an stepper before going to Dashboard
 		if (nextProps.data && nextProps.data.users && nextProps.data.users.users) {
-			if (!nextProps.data.users.users.length) {
-				this.setInitialConfig();
+			if (nextProps.data.users.users.length === 0) {
+				// this.setInitialConfig();
 				// this.props.history.push('/initialConfig');
 			}
 		}
