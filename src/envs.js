@@ -10,7 +10,7 @@ const envs = (() => {
 	} else {
 		return {
 			ENVIRONMENT: 'production',
-			SERVERURL: 'http://localhost:3001/api',
+			SERVERURL: 'http://66.70.188.64:3001/api',
 			PORT: 3001
 		};
 	}
